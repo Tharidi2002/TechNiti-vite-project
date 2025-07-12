@@ -1,0 +1,162 @@
+/*
+!* Navbar.css *!
+.navbar {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.navbar-logo img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+.business-name {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+}
+
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.navbar-item {
+    position: relative;
+}
+
+.navbar-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+    padding: 0.5rem 0;
+    display: inline-block;
+}
+
+.navbar-link:hover {
+    color: #3498db;
+}
+
+.signin-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 1rem;
+    font-size: 1rem;
+}
+
+.signin-button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.signin-button .navbar-link {
+    color: white;
+}
+
+.signin-button .navbar-link:hover {
+    color: white;
+}
+
+!* Active link styling *!
+.navbar-item .active {
+    color: #3498db;
+    font-weight: 600;
+}
+
+!* Mobile menu *!
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .navbar-container {
+        padding: 0.5rem 1rem;
+        flex-wrap: wrap;
+    }
+
+    .menu-toggle {
+        display: block;
+        order: 1;
+    }
+
+    .navbar-logo {
+        order: 0;
+        gap: 0.5rem;
+    }
+
+    .navbar-logo img {
+        height: 35px;
+    }
+
+    .business-name {
+        font-size: 1.2rem;
+    }
+
+    .navbar-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 0;
+        order: 2;
+        padding: 1rem 0;
+    }
+
+    .navbar-menu.active {
+        display: flex;
+    }
+
+    .navbar-item {
+        width: 100%;
+        text-align: center;
+        padding: 0.8rem 0;
+    }
+
+    .signin-button {
+        display: none;
+        width: 100%;
+        margin: 1rem 0 0;
+        order: 3;
+        padding: 0.8rem;
+    }
+
+    .signin-button.active {
+        display: block;
+    }
+}*/

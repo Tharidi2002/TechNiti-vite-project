@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "ASUS",
+    "price": 555999,
+    "currency": "LKR. ",
+    "image": "ASUS.jpg"
+  },
+  {
+    "id": 2,
+    "name": "VivoBook",
+    "price": 399999,
+    "currency": "LKR. ",
+    "image": "VivoBook.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Hp",
+    "price": 250999,
+    "currency": "LKR. ",
+    "image": "hp.jpg"
+  }
+]
