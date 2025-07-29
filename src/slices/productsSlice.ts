@@ -17,8 +17,8 @@ export const getAllProducts = createAsyncThunk(
     async () => {
         // const response = await fetch('./product-data.json');
         // return await response.json();
-
         const response = await backendApi.get('/products/all');
+        console.log(response);
         return await response.data;
     }
 )
@@ -34,7 +34,7 @@ const productSlice = createSlice({
             state.list = action.payload;
         }).addCase(getAllProducts.rejected, (state, action) => {
             state.error = action.error.message || 'Failed to load products';
-            alert(state.error);
+            alert("Error loading: " + state.error);
         })
     }
 });
