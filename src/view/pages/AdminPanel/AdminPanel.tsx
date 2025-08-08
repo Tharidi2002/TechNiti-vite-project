@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export function AdminPanel() {
     // Mock data for demonstration
     const stats = [
@@ -7,12 +9,25 @@ export function AdminPanel() {
         { name: 'Customer Satisfaction', value: '94%', change: '+3%', changeType: 'positive' },
     ];
 
-    const recentOrders = [
+
+    const [products, setProducts] = useState([
+        { id: 1, name: "ASUS ROG Strix Laptop", price: "LKR 289,999", stock: 12 },
+        { id: 2, name: "Apple MacBook Air", price: "LKR 399,000", stock: 8 },
+        { id: 3, name: "Dell XPS 13", price: "LKR 249,500", stock: 15 },
+        { id: 4, name: "Lenovo ThinkPad X1", price: "LKR 310,000", stock: 5 },
+    ]);
+
+    const [recentOrders] = useState([
         { id: '#ORD-001', customer: 'John Doe', date: '15 Oct, 2023', amount: 'LKR 25,999', status: 'Completed' },
         { id: '#ORD-002', customer: 'Jane Smith', date: '14 Oct, 2023', amount: 'LKR 42,500', status: 'Processing' },
         { id: '#ORD-003', customer: 'Robert Johnson', date: '14 Oct, 2023', amount: 'LKR 89,750', status: 'Completed' },
         { id: '#ORD-004', customer: 'Emily Davis', date: '13 Oct, 2023', amount: 'LKR 32,499', status: 'Pending' },
-    ];
+    ]);
+
+    // Remove product handler
+    const handleRemoveProduct = (id: number) => {
+        setProducts(products.filter(product => product.id !== id));
+    };
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -67,8 +82,51 @@ export function AdminPanel() {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* Recent Orders */}
-                    <div className="lg:col-span-2">
+                    {/* All Products */}
+                    <div className="lg:col-span-2 mb-8">
+                        <div className="bg-white rounded-lg shadow overflow-hidden mb-8">
+                            <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                                <h2 className="text-lg font-medium text-gray-900">All Products</h2>
+                                <span className="text-sm text-gray-500">Total: {products.length}</span>
+                            </div>
+                            <div className="overflow-x-auto">
+                                <table className="min-w-full divide-y divide-gray-200">
+                                    <thead className="bg-gray-50">
+                                    <tr>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product ID</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stock</th>
+                                        <th className="px-6 py-3"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody className="bg-white divide-y divide-gray-200">
+                                    {products.map(product => (
+                                        <tr key={product.id}>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{product.id}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{product.name}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{product.price}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{product.stock}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-right">
+                                                <button
+                                                    onClick={() => handleRemoveProduct(product.id)}
+                                                    className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs font-medium transition-colors"
+                                                >
+                                                    Remove
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                    {products.length === 0 && (
+                                        <tr>
+                                            <td colSpan={5} className="px-6 py-4 text-center text-gray-400">No products available.</td>
+                                        </tr>
+                                    )}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        {/* Recent Orders */}
                         <div className="bg-white rounded-lg shadow overflow-hidden">
                             <div className="px-6 py-4 border-b border-gray-200">
                                 <h2 className="text-lg font-medium text-gray-900">Recent Orders</h2>
@@ -110,15 +168,15 @@ export function AdminPanel() {
                                                 {order.amount}
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
-                          <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                              order.status === 'Completed'
-                                  ? 'bg-green-100 text-green-800'
-                                  : order.status === 'Processing'
-                                      ? 'bg-yellow-100 text-yellow-800'
-                                      : 'bg-red-100 text-red-800'
-                          }`}>
-                            {order.status}
-                          </span>
+                                                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                                                        order.status === 'Completed'
+                                                            ? 'bg-green-100 text-green-800'
+                                                            : order.status === 'Processing'
+                                                                ? 'bg-yellow-100 text-yellow-800'
+                                                                : 'bg-red-100 text-red-800'
+                                                    }`}>
+                                                        {order.status}
+                                                    </span>
                                             </td>
                                         </tr>
                                     ))}
@@ -133,7 +191,7 @@ export function AdminPanel() {
                         </div>
                     </div>
 
-                    {/* Quick Actions */}
+                    {/* Quick Actions & Recent Activity */}
                     <div>
                         <div className="bg-white rounded-lg shadow overflow-hidden mb-8">
                             <div className="px-6 py-4 border-b border-gray-200">
@@ -148,7 +206,7 @@ export function AdminPanel() {
                                 </button>
                                 <button className="bg-green-100 hover:bg-green-200 text-green-700 py-3 px-4 rounded-lg flex flex-col items-center transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2" />
                                     </svg>
                                     <span>Manage Orders</span>
                                 </button>
@@ -160,7 +218,7 @@ export function AdminPanel() {
                                 </button>
                                 <button className="bg-yellow-100 hover:bg-yellow-200 text-yellow-700 py-3 px-4 rounded-lg flex flex-col items-center transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10" />
                                     </svg>
                                     <span>Reports</span>
                                 </button>
@@ -201,7 +259,7 @@ export function AdminPanel() {
                                     <li className="flex items-start">
                                         <div className="bg-blue-100 p-2 rounded-full">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
-                                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-2-4.472" />
                                             </svg>
                                         </div>
                                         <div className="ml-4">

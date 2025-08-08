@@ -10,20 +10,7 @@ import {AdminPanel} from "../../pages/AdminPanel/AdminPanel.tsx";
 import {ManageProducts} from "../../pages/ManageProducts/ManageProducts.tsx";
 import {useEffect, useState} from "react";
 
-/*
-export const MainContent = () => {
-    return (
-        <div className="container mx-auto px-4 py-8">
-            <Routes>
-                <Route path="/" element={<Home />}/>
-                <Route path="/about" element={<About />}/>
-                <Route path="/contact" element={<Contact />}/>
 
-                <Route path="/shopping-cart" element={<ShoppingCart/>}/>
-            </Routes>
-        </div>
-    );
-};*/
 
 export function MainContent() { // Changed from mainContent to MainContent
     const [role, setRole] = useState<string | null>(null);
@@ -59,6 +46,11 @@ export function MainContent() { // Changed from mainContent to MainContent
                                 <ManageProducts/>
                             </ProtectedRoute>
                         }/>
+                       {/* <Route path="/manage-products" element={
+                            <ProtectedRoute allowedRoles={['admin']}>
+                                <ManageProducts/>
+                            </ProtectedRoute>
+                        }/>*/}
                     </>
                 )}
             </Routes>
